@@ -8,14 +8,17 @@ const Info = () => {
       <div className="btn-group">
 
       <button className="btn1">
-        {/* <span> */}
+        <span>
         <img className="icon" src="src/assets/email.png" alt="email" />
-        {/* </span> */}
+        </span>
         Email{" "}
       </button>
       <button className="btn2">
+        <span>
+
         <img className="icon" src="src/assets/in.png" alt="linkedin" />
         LinkedIn{" "}
+        </span>
       </button>
       </div>
     </div>
