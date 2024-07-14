@@ -58,6 +58,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 0;
+  position: relative;
 }
 .card--image {
   width: 100%;
@@ -91,6 +92,17 @@ body {
 .card > p > .bold {
   font-weight: bold;
 }
+.card--badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background-color: white;
+  padding: 5px 7px;
+  border-radius: 2px;
+  font-weight: bold;
+}
+
+
 
 #root {
   max-width: 1280px;
