@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "./components/Header";
-import Hero from "./components/Hero";
+import Form from "./components/Form";
 import React from "react";
 // import Card from "./components/Card";
 // import data from "./data";
@@ -24,7 +24,7 @@ export default function App() {
   return (
     <>
       <Header />
-      <Hero />
+      <Form />
       {/* <section className="cards-list">{cards}</section> */}
     </>
   );
