@@ -2,30 +2,12 @@ import "./App.css";
 import Header from "./components/Header";
 import Form from "./components/Form";
 import React from "react";
-// import Card from "./components/Card";
-// import data from "./data";
 
 export default function App() {
-  // const cards = data.map((item) => {
-  //   return (
-  //     <Card
-  //       key={item.id}
-  //       {...item}
-  //       // img={item.coverImg}
-  //       // rating={item.stats.rating}
-  //       // reviewCount={item.stats.reviewCount}
-  //       // location={item.location}
-  //       // title={item.title}
-  //       // price={item.price}
-  //       // openSpots={item.openSpots}
-  //     />
-  //   );
-  // });
   return (
     <>
       <Header />
       <Form />
-      {/* <section className="cards-list">{cards}</section> */}
     </>
   );
 }

@@ -6,7 +6,8 @@ body {
   font-family: "Karla", sans-serif;
   margin: 0;
   background-color: #FFFFFF;
-
+  display: flex;
+  place-items: start;
 }
 #root {
   max-width: 1280px;
@@ -103,4 +104,9 @@ margin-top: 28px;;
   flex-direction: column;
   /* justify-content: center; */
   display: flex;
+}
+.meme--image{
+  width: 477px;
+margin-top: 32px;;
+
 }
