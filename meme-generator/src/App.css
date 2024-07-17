@@ -5,7 +5,7 @@
 body {
   font-family: "Karla", sans-serif;
   margin: 0;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: flex;
   place-items: start;
 }
@@ -26,19 +26,19 @@ body {
   align-items: center;
   padding: 0 29px;
   font-size: 15px;
-  background: linear-gradient(90deg,#672280 0%, #A626D3 100%);
+  background: linear-gradient(90deg, #672280 0%, #a626d3 100%);
 }
 
 .logo {
   display: flex;
   flex-direction: row;
   align-items: left;
-  justify-content:start;
+  justify-content: start;
   /* padding: 0 20px; */
   font-size: 15px;
   /* margin-left: 29px;; */
 }
-.logo--image{
+.logo--image {
   width: 31px;
   height: auto;
   /* margin-right: 7px; */
@@ -53,60 +53,55 @@ body {
   font-size: 20px;
   font-weight: bold;
 }
-.logo--description{
-  font-size: 12px;;
+.logo--description {
+  font-size: 12px;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
 }
 .input--label {
-  margin:0;
+  margin: 0;
   color: #374151;
   /* align-items: left; */
   /* text-align: left; */
-
 }
 .input--field {
-  margin:0;
+  margin: 0;
   align-items: left;
   text-align: left;
   /* color: #FFFFFF; */
-  
 }
 input {
   width: 222px;
-  height: 35px;;
-  background-color: #FFFFFF;
-  
+  height: 35px;
+  background-color: #ffffff;
 }
-.input--group{
+.input--group {
   width: 477px;
-margin-top: 28px;;
+  margin-top: 28px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.button--get{
+.button--get {
   width: 477px;
   height: 40px;
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
   margin-top: 15px;
-  background: linear-gradient(90deg,#672280 0%, #A626D3 100%);
+  background: linear-gradient(90deg, #672280 0%, #a626d3 100%);
   color: #fff;
   border: none;
   border-radius: 5px;
 }
-.form{
+.form {
   align-items: center;
   flex-direction: column;
   /* justify-content: center; */
   display: flex;
 }
-.meme--image{
+.meme--image {
   width: 477px;
-margin-top: 32px;;
-
+  margin-top: 32px;
 }
