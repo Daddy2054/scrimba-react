@@ -6,6 +6,7 @@ export default function Form() {
     bottomText:"",
     randomImage:"http://i.imgflip.com/1bij.jpg"
   });
+  // eslint-disable-next-line no-unused-vars
   const[allMemes,setAllMemes]=React.useState(memesData);
 // const [memeImage, setMemeImage] = React.useState("");
 

@@ -1,0 +1,11 @@
+
+
+.box{
+  height: 100px;
+  width: 100px;
+  border: 2px;
+  background-color: yellow;
+  margin: 5px;
+  display: inline-block;
+
+}
