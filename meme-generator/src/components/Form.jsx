@@ -1,55 +1,63 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
-import memesData from "../../memesData";
+// import memesData from "../../memesData";
 export default function Form() {
+
   const [meme, setMeme] = React.useState({
-    topText: "",
-    bottomText: "",
+    topText: "one does not simply",
+    bottomText: "walk into mordor",
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
-  // eslint-disable-next-line no-unused-vars
-  const [allMemes, setAllMemes] = React.useState(memesData);
-  // const [memeImage, setMemeImage] = React.useState("");
+  const [allMemes, setAllMemes] = React.useState([]);
+  
+  React.useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((res) => res.json())
+      // .then((data)=>console.log(data));
+      .then((data) => setAllMemes(data.data.memes));
+  }, []);
 
   function getMemeImage() {
-    const memesArray = allMemes.data.memes;
-    const randomNumber = Math.floor(Math.random() * memesArray.length);
-    const url = memesArray[randomNumber].url;
+    // const memesArray = allMemes.data.memes;
+    // console.log(allMemes);
+    const randomNumber = Math.floor(Math.random() * allMemes.length);
+    const url = allMemes[randomNumber].url;
     setMeme((prevMeme) => ({
       ...prevMeme,
       randomImage: url,
     }));
   }
-  //     const meme = memesData.data.memes[Math.floor(Math.random() * memesData.data.memes.length)];
-  //     const {url} = meme;
-  //     console.log(url);
-  //     setMemeImage(url);
-  //   }
+
 
   function handleChange(event) {
-    const {name, value} = event.target
-    setMeme(prevMeme => {
-        return {
-            ...prevMeme,
-            [name]:  value
-        }
-    })
-}
+    const { name, value } = event.target;
+    setMeme((prevMeme) => {
+      return {
+        ...prevMeme,
+        [name]: value,
+      };
+    });
+  }
   return (
     <>
       <div className="form">
         <div className="input--group">
           <div className="input--field">
             <p className="input--label">Top text</p>
-            <input type="text" name="topText" 
-            onChange={handleChange}
-            value={meme.topText}
+            <input
+              type="text"
+              name="topText"
+              onChange={handleChange}
+              value={meme.topText}
             />
           </div>
           <div className="input--field">
             <p className="input--label">Bottom text</p>
-            <input type="text" name="bottomText" 
-            onChange={handleChange}
-            value={meme.bottomText}
+            <input
+              type="text"
+              name="bottomText"
+              onChange={handleChange}
+              value={meme.bottomText}
             />
           </div>
         </div>

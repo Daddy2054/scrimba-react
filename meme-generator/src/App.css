@@ -74,7 +74,12 @@ body {
 input {
   width: 222px;
   height: 35px;
-  background-color: #ffffff;
+  color: #374151;
+  background-color: #eee9e9;
+  font-family: "Karla", sans-serif;
+  border-radius: 5px;
+  border: 1px solid #D5D4D8;
+  text-indent: 5px;
 }
 .input--group {
   width: 477px;
