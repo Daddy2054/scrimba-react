@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react"
 import Sidebar from "./components/Sidebar"
 import Editor from "./components/Editor"
@@ -15,10 +16,16 @@ import "./style.css";
  */
 
 export default function App() {
-  const [notes, setNotes] = React.useState([])
+  const [notes, setNotes] = React.useState(
+    // lazy state initialization
+    () => JSON.parse(localStorage.getItem("notes")) || []
+)
   const [currentNoteId, setCurrentNoteId] = React.useState(
     (notes[0] && notes[0].id) || ""
   )
+  React.useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes))
+}, [notes])
 
   function createNewNote() {
     const newNote = {
