@@ -2,61 +2,70 @@
 import React from "react"
 import Sidebar from "./components/Sidebar"
 import Editor from "./components/Editor"
-import { data } from "./data"
+// import { data } from "./data"
 import Split from "react-split"
 import { nanoid } from "nanoid"
 import "./style.css";
+import { addDoc, onSnapshot } from "firebase/firestore"
+import { notesCollection } from "./firebase"
+// import { addDoc } from 'firebase/firestore'
 
-/**
- * Challenge: Spend 10-20+ minutes reading through the code
- * and trying to understand how it's currently working. Spend
- * as much time as you need to feel confident that you 
- * understand the existing code (although you don't need
- * to fully understand everything to move on)
- */
+
+
 
 export default function App() {
   const [notes, setNotes] = React.useState(
     // lazy state initialization
-    () => JSON.parse(localStorage.getItem("notes")) || []
-)
+    // () => JSON.parse(localStorage.getItem("notes")) || 
+    []
+  )
   const [currentNoteId, setCurrentNoteId] = React.useState(
     (notes[0] && notes[0].id) || ""
   )
-  React.useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes))
-}, [notes])
 
-  function createNewNote() {
+  React.useEffect(() => {
+    const unsubscribe = onSnapshot(notesCollection, function (snapshot) {
+      // Sync up our local notes array with the snapshot data
+      const notesArr = snapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+      }))
+      setNotes(notesArr)
+    })
+    return unsubscribe
+  }, [])
+
+  async function createNewNote() {
     const newNote = {
-      id: nanoid(),
+      // id: nanoid(),
       body: "# Type your markdown note's title here"
     }
-    setNotes(prevNotes => [newNote, ...prevNotes])
-    setCurrentNoteId(newNote.id)
+    // setNotes(prevNotes => [newNote, ...prevNotes])
+    const newNoteRef = await addDoc(notesCollection, newNote)
+    setCurrentNoteId(newNoteRef.id)
   }
 
   function updateNote(text) {
-        // Put the most recently-modified note at the top
+    // Put the most recently-modified note at the top
 
     setNotes(oldNotes => {
-        const newArray = []
-        for(let i = 0; i < oldNotes.length; i++) {
-            const oldNote = oldNotes[i]
-            if(oldNote.id === currentNoteId) {
-                newArray.unshift({ ...oldNote, body: text })
-            } else {
-                newArray.push(oldNote)
-            }
+      const newArray = []
+      for (let i = 0; i < oldNotes.length; i++) {
+        const oldNote = oldNotes[i]
+        if (oldNote.id === currentNoteId) {
+          newArray.unshift({ ...oldNote, body: text })
+        } else {
+          newArray.push(oldNote)
         }
-        return newArray
+      }
+      return newArray
     })
-}
+  }
 
-function deleteNote(event, noteId) {
-  event.stopPropagation()
-  setNotes(oldNotes => oldNotes.filter(note => note.id !== noteId))
-}
+  function deleteNote(event, noteId) {
+    event.stopPropagation()
+    setNotes(oldNotes => oldNotes.filter(note => note.id !== noteId))
+  }
 
   function findCurrentNote() {
     return notes.find(note => {
