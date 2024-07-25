@@ -6,7 +6,7 @@ import Editor from "./components/Editor"
 import Split from "react-split"
 import { nanoid } from "nanoid"
 import "./style.css";
-import { addDoc, onSnapshot, doc, deleteDoc } from "firebase/firestore"
+import { addDoc, onSnapshot, doc, deleteDoc, setDoc } from "firebase/firestore"
 import { notesCollection, db } from "./firebase"
 
 
@@ -19,7 +19,8 @@ export default function App() {
     []
   )
   const [currentNoteId, setCurrentNoteId] = React.useState(
-    (notes[0] && notes[0].id) || ""
+    // (notes[0] && notes[0].id) || 
+    ""
   )
 
   React.useEffect(() => {
@@ -34,6 +35,13 @@ export default function App() {
     return unsubscribe
   }, [])
 
+  React.useEffect(() => {
+    if (!currentNoteId) {
+        setCurrentNoteId(notes[0]?.id)
+    }
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [notes])
+
   async function createNewNote() {
     const newNote = {
       // id: nanoid(),
@@ -44,23 +52,11 @@ export default function App() {
     setCurrentNoteId(newNoteRef.id)
   }
 
-  function updateNote(text) {
-    // Put the most recently-modified note at the top
 
-    setNotes(oldNotes => {
-      const newArray = []
-      for (let i = 0; i < oldNotes.length; i++) {
-        const oldNote = oldNotes[i]
-        if (oldNote.id === currentNoteId) {
-          newArray.unshift({ ...oldNote, body: text })
-        } else {
-          newArray.push(oldNote)
-        }
-      }
-      return newArray
-    })
-  }
-
+  async function updateNote(text) {
+    const docRef = doc(db, "notes", currentNoteId)
+    await setDoc(docRef, { body: text }, { merge: true })
+}
   async function deleteNote(noteId) {
     const docRef = doc(db, "notes", noteId)
     await deleteDoc(docRef)
@@ -91,8 +87,8 @@ export default function App() {
 
             />
             {
-              currentNoteId &&
-              notes.length > 0 &&
+              // currentNoteId &&
+              // notes.length > 0 &&
               <Editor
                 currentNote={findCurrentNote()}
                 updateNote={updateNote}
